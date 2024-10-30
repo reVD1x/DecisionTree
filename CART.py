@@ -1,10 +1,20 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+
 # 加载数据集
-data = pd.read_csv('lung_cancer_data.csv')
-X = data.drop('target', axis=1)
-y = data['target']
+filename = 'lung_cancer_data.csv'
+dataset = pd.read_csv(filename)
+
+features = ['GENDER', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY',
+            'PEER_PRESSURE', 'CHRONIC DISEASE', 'FATIGUE ', 'ALLERGY ',
+            'WHEEZING', 'ALCOHOL CONSUMING', 'COUGHING',
+            'SHORTNESS OF BREATH', 'SWALLOWING DIFFICULTY', 'CHEST PAIN']
+target = 'LUNG_CANCER'
+
+# 提取特征和目标变量
+X = dataset[features]
+y = dataset[target]
 
 # 划分训练集和测试集
 X_train, X_test, y_train, y_test = train_test_split(X, y)
@@ -38,17 +48,3 @@ def calculate_gini(groups, classes):
     return gini
 
 
-# 创建一个字典来存储每个元素及其出现次数
-element_counts = {}
-
-# 遍历二维列表
-for sublist in X:
-    # 获取每个一维列表的第一个元素
-    first_element = sublist[0]
-    # 使用字典的 get 方法来简化计数逻辑
-    # get 方法会返回指定键的值，如果键不存在，则返回默认值（这里是0）
-    element_counts[first_element] = element_counts.get(first_element, 0) + 1
-
-# 输出结果
-for element, count in element_counts.items():
-    print(f"{element}: {count}")
