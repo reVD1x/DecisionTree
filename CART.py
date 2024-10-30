@@ -5,10 +5,12 @@ from sklearn.model_selection import train_test_split
 filename = 'lung_cancer_data.csv'
 dataset = pd.read_csv(filename)
 
+print(dataset)
+
 features = ['GENDER', 'SMOKING', 'YELLOW_FINGERS', 'ANXIETY',
-            'PEER_PRESSURE', 'CHRONIC DISEASE', 'FATIGUE ', 'ALLERGY ',
+            'PEER_PRESSURE', 'CHRONIC_DISEASE', 'FATIGUE', 'ALLERGY',
             'WHEEZING', 'ALCOHOL CONSUMING', 'COUGHING',
-            'SHORTNESS OF BREATH', 'SWALLOWING DIFFICULTY', 'CHEST PAIN']
+            'SHORTNESS_OF_BREATH', 'SWALLOWING_DIFFICULTY', 'CHEST_PAIN']
 target = 'LUNG_CANCER'
 
 # 提取特征和目标变量
