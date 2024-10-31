@@ -38,6 +38,8 @@ class DecisionTree:
 
     # 根据决策树进行预测
     def predict(self, X):
+        if isinstance(X, pd.DataFrame):
+            X = X.to_numpy()
         return np.array([self._traverse_tree(x, self.root) for x in X])
 
     def _gini(self, y):
@@ -67,15 +69,15 @@ class DecisionTree:
             X = X.to_numpy()
 
         for feature in range(X.shape[1]):
-            current_gini = self._weighted_gini(y, X[:, feature])
-            if current_gini < best_gini and self.available_features[feature]:
-                best_gini = current_gini
-                best_feature = feature
+            if self.available_features[feature]:
+                current_gini = self._weighted_gini(y, X[:, feature])
+                if current_gini < best_gini:
+                    best_gini = current_gini
+                    best_feature = feature
 
         return best_feature, best_gini < self._gini(y)
 
     def _most_common_label(self, y):
-
         counter = Counter(y)
         most_common = counter.most_common(1)[0][0]
         return most_common
@@ -94,6 +96,7 @@ class DecisionTree:
 
         # 停止条件
         if (depth >= self.max_depth
+                or self.available_features.sum() == 0
                 or n_labels == 1
                 or n_samples < self.min_samples_split):
             leaf_label = self._most_common_label(y)
@@ -121,6 +124,21 @@ class DecisionTree:
         return Node(feature=best_feature, left=left_child, right=right_child)
 
 
+def calculate_accuracy(list1, list2):
+    # 初始化不同的元素计数器
+    difference_count = 0
+
+    # 遍历列表中的每一个元素
+    for i in range(len(list1)):
+        # 如果元素不同，则增加计数器
+        if list1[i] != list2[i]:
+            difference_count += 1
+
+    # 计算不同的比率
+    difference_ratio = (len(list1) - difference_count) / len(list1)
+    return difference_ratio
+
+
 def main():
     # 加载数据集
     filename = 'lung_cancer_data.csv'
@@ -142,9 +160,11 @@ def main():
     clf = DecisionTree()
     clf.fit(X_train, y_train)
 
-    print(X_test)
-    print(y_test)
-    print(clf.predict(X_test))
+    print(y_test.to_numpy())
+    y_predict = clf.predict(X_test)
+    print(y_predict)
+    accuracy = calculate_accuracy(y_test.to_numpy(), y_predict)
+    print("The accuracy of different elements is:", accuracy)
 
 
 if __name__ == '__main__':
