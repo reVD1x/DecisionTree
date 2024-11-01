@@ -44,10 +44,10 @@ class DecisionTree:
         probabilities = counts / len(y)
         return 1 - np.sum(probabilities ** 2)
 
-    def _weighted_gini(self, y, X_column):
+    def _weighted_gini(self, y, X_col):
         """计算加权基尼系数"""
-        y_left = y[X_column == 1]
-        y_right = y[X_column == 0]
+        y_left = y[X_col == 1]
+        y_right = y[X_col == 0]
 
         n = len(y)
         n_left = len(y_left)

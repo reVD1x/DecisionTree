@@ -23,8 +23,8 @@ class Node:
 class DecisionTree:
     """决策树类，用于构建CART"""
 
-    def __init__(self, method, min_samples_split=2, max_depth=100, y_most=0):
-        self.method = methods['ID3']
+    def __init__(self, method=methods['ID3'], min_samples_split=2, max_depth=100, y_most=0):
+        self.method = method
         self.min_samples_split = min_samples_split  # 节点分裂所需的最少样本数，用于预剪枝
         self.max_depth = max_depth  # 树的最大深度，用于预剪枝
         self.root = None  # 树的根节点
@@ -34,7 +34,7 @@ class DecisionTree:
     def fit(self, X, y):
         """开始训练决策树"""
         self.available_features = np.ones(X.shape[1], dtype=int)
-        self.y_most= self._most_common_label(y)
+        self.y_most = self._most_common_label(y)
         self.root = self._grow_tree(X, y)
 
     def predict(self, X):
@@ -65,7 +65,6 @@ class DecisionTree:
 
     def _information_gain_rate(self, y, X_col):
         """计算信息增益率"""
-        pass
 
     def _best_split(self, X, y):
         """选择最佳分裂特征"""
