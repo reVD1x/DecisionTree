@@ -21,9 +21,9 @@ class Node:
 
 
 class DecisionTree:
-    """决策树类，用于构建CART"""
+    """决策树类，用于构建决策树"""
 
-    def __init__(self, method=methods['ID3'], min_samples_split=2, max_depth=100, y_most=0):
+    def __init__(self, method, min_samples_split=2, max_depth=100, y_most=0):
         self.method = method
         self.min_samples_split = min_samples_split  # 节点分裂所需的最少样本数，用于预剪枝
         self.max_depth = max_depth  # 树的最大深度，用于预剪枝
@@ -64,7 +64,8 @@ class DecisionTree:
         return information_gain
 
     def _information_gain_rate(self, y, X_col):
-        """计算信息增益率"""
+        """计算信息增益比"""
+        return self._information_gain(y, X_col) / self._entropy(y)
 
     def _best_split(self, X, y):
         """选择最佳分裂特征"""
@@ -80,6 +81,7 @@ class DecisionTree:
                     current_criteria = self._information_gain(y, X[:, feature])
                 elif self.method == 1:
                     current_criteria = self._information_gain_rate(y, X[:, feature])
+
                 if current_criteria > best_criteria:
                     best_criteria = current_criteria
                     best_feature = feature
@@ -161,19 +163,31 @@ def main():
     # 划分训练集和测试集
     X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-    # 构建CART并开始训练
-    clf = DecisionTree()
+    # 构建ID3决策树并开始训练
+    clf = DecisionTree(method=methods['ID3'])
     clf.fit(X_train, y_train)
 
-    # 根据CART预测测试集，计算准确率
+    # 根据决策树预测测试集，计算准确率
     y_predict = clf.predict(X_test)
     accuracy = clf.calculate_accuracy(y_test.to_numpy(), y_predict)
 
     print("测试集实际标签：")
     print(y_test.to_numpy())
-    print("测试集预测标签：")
+    print("测试集预测标签（ID3）：")
     print(y_predict)
     print("预测准确率：", accuracy)
+
+    # 构建C4.5决策树并开始训练
+    clf_ = DecisionTree(method=methods['C4.5'])
+    clf_.fit(X_train, y_train)
+
+    # 根据决策树预测测试集，计算准确率
+    y_predict_ = clf_.predict(X_test)
+    accuracy_ = clf_.calculate_accuracy(y_test.to_numpy(), y_predict_)
+
+    print("测试集预测标签（C4.5）：")
+    print(y_predict_)
+    print("预测准确率：", accuracy_)
 
 
 if __name__ == '__main__':
