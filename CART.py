@@ -25,7 +25,7 @@ class DecisionTree:
         self.min_samples_split = min_samples_split  # 节点分裂所需的最少样本数，用于预剪枝
         self.max_depth = max_depth  # 树的最大深度，用于预剪枝
         self.root = None  # 树的根节点
-        self.available_features = None
+        self.available_features = None  # 可用于分裂的特征
 
     def fit(self, X, y):
         """开始训练CART"""
