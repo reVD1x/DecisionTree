@@ -23,7 +23,7 @@ CART（Classification and Regression Trees），即回归与分类树。在分�
 
 CART模型通过递归地分割数据集来构建一棵二叉树，每次分裂都旨在最大化信息增益或最小化信息不纯度。分裂的核心在于找到当前子树的最佳分裂特征，在CART分类树中通常采用加权基尼系数作为评判标准。同时通过预剪枝和后剪枝来限制分类树的生长，以规避对数据过于敏感而带来的过拟合问题。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image002-1731005548089-20.gif)
+<img src=".\assets\clip_image002-1731005548089-20.gif" alt="img" />
 
 图1 CART分类树构建流程图
 
@@ -117,7 +117,7 @@ vi. 调用prune方法执行后剪枝，并再次评估剪枝后的模型性能�
 
 基尼系数衡量的是一个集合的不纯度，取值范围在[0, 1]之间，值越小表示数据集越纯。对于数据集D，其基尼系数Gini(D)定义为：
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image004-1731005550456-22.gif)
+<img src=".\assets\clip_image004.gif" alt="img" />
 
 其中，pk是第k类在数据集D中的比例。
 
@@ -125,7 +125,7 @@ vi. 调用prune方法执行后剪枝，并再次评估剪枝后的模型性能�
 
 加权基尼系数综合考虑了数据集各个子集的基尼系数和子集的大小，在决策树中，我们需要根据某个特征将数据集分成多个子集，并计算这些子集的加权基尼系数。对于原始数据集D，把S作为分裂特征，则加权基尼系数Gini(D, S)定义为：
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image006-1731005552878-24.gif)
+<img src=".\assets\clip_image006.gif" alt="img" />
 
 其中，m是分裂后的子集数，Di是第i个子集，∣Di∣是第i个子集的样本数，∣D∣是原始数据集的样本数，Gini(Di)是第i个子集的基尼系数。
 
@@ -653,7 +653,7 @@ if __name__ == '__main__':
 
 预测准确率较高，且后剪枝后准确率有所上升。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image008.jpg)
+<img src=".\assets\clip_image008.jpg" alt="img" />
 
 图2 测试案例一
 
@@ -673,11 +673,11 @@ if __name__ == '__main__':
 
 由此可见，后剪枝可以避免出现过拟合的情况，并由此提高预测准确率。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image010.jpg)
+<img src=".\assets\clip_image010.jpg" alt="img" />
 
 图3 测试案例二
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image012.jpg)
+<img src=".\assets\clip_image012.jpg" alt="img" />
 
 图4 测试案例三
 
@@ -815,7 +815,7 @@ label：如果节点是叶子节点，则此属性存储节点的类别标签。
 
 is_leaf_node()：检查节点是否为叶子节点。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image014.gif)
+<img src=".\assets\clip_image014.gif" alt="img" />
 
 图1 决策树构建流程图
 
@@ -887,7 +887,7 @@ v. 调用predict方法使用ID3和C4.5两种算法分别构建决策树模型，
 
 熵是衡量数据集混乱度的一个指标。对于一个包含多个类别的数据集D，其熵H(D)定义为：
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image016.gif)
+<img src=".\assets\clip_image016.gif" alt="img" />
 
 其中，pi是第i类在数据集中所占的比例。
 
@@ -895,7 +895,7 @@ v. 调用predict方法使用ID3和C4.5两种算法分别构建决策树模型，
 
 信息增益用于衡量某个特征对数据集的贡献。对于特征A，其信息增益IG(A)定义为：
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image018.gif)
+<img src=".\assets\clip_image018.gif" alt="img" />
 
 其中，Dv是数据集中特征A取值为v的子集，∣D∣和|Dv∣分别是数据集和子集的大小。
 
@@ -903,11 +903,11 @@ v. 调用predict方法使用ID3和C4.5两种算法分别构建决策树模型，
 
 信息增益比用于衡量特征对数据集贡献的重要性，定义为：
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image020.gif)
+<img src=".\assets\clip_image020.gif" alt="img" />
 
 其中，SplitInfo(A)是特征A的分裂信息，定义为：
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image022.gif)
+<img src=".\assets\clip_image022.gif" alt="img" />
 
  
 
@@ -1347,7 +1347,7 @@ if __name__ == '__main__':
 
 预测准确率较高，但ID3和C4.5预测结果相同。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image024.jpg)
+<img src=".\assets\clip_image024.jpg" alt="img" />
 
 图2 测试案例一
 
@@ -1367,11 +1367,11 @@ if __name__ == '__main__':
 
 由此可见，在特征呈0-1分布的简单数据集中，ID3与C4.5算法决策树的结果常常一样（原因见问题分析）。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image026.jpg)
+<img src=".\assets\clip_image026.jpg" alt="img" />
 
 图3 测试案例二
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image028.jpg)
+<img src=".\assets\clip_image028.jpg" alt="img" />
 
 图4 测试案例三
 
@@ -1435,7 +1435,7 @@ if __name__ == '__main__':
 
 单棵C4.5决策树的构建方法见上文决策树相关内容。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image030.gif)
+<img src=".\assets\clip_image030.gif" alt="img" />
 
 图1 随机森林构建与预测流程图
 
@@ -1951,7 +1951,7 @@ if __name__ == '__main__':
 
 预测准确率较高。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image032.jpg)
+<img src=".\assets\clip_image032.jpg" alt="img" />
 
  
 
@@ -1959,7 +1959,7 @@ if __name__ == '__main__':
 
 预测准确率较高。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image034.jpg)
+<img src=".\assets\clip_image034.jpg" alt="img" />
 
  
 
@@ -1967,7 +1967,7 @@ if __name__ == '__main__':
 
 预测准确率较高。
 
-![img](D:\作业\实习\软件基础实践\算法题\assets\clip_image036.jpg)
+<img src=".\assets\clip_image036.jpg" alt="img" />
 
  
 
